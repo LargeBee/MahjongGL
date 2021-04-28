@@ -26,7 +26,7 @@ int main(int, char**) {
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
-    } 
+    } //
 
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);  

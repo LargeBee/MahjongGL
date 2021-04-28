@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/rowan/dev/mahjonggl/build",
-  "command": "/bin/x86_64-linux-gnu-g++-9    -g   -o CMakeFiles/MahjongGL.dir/src/main.cpp.o -c /home/rowan/dev/mahjonggl/src/main.cpp",
-  "file": "/home/rowan/dev/mahjonggl/src/main.cpp"
-}
-]

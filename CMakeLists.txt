@@ -17,17 +17,15 @@ endif()
 
 add_subdirectory(external/glad)
 add_subdirectory(external/glm)
-add_subdirectory(external/spd)
 
 
 include_directories(include/
                     external/glad/include/
                     external/glfw/include/
                     external/glm/
-                    external/stb/
-                    external/spd/include/)
+                    external/stb/)
 
-file(GLOB EXTERNAL_SOURCES external/glad/src/glad.c external/spd/src/spdlog.cpp)
+file(GLOB EXTERNAL_SOURCES external/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS include/*.hpp)
 file(GLOB PROJECT_SOURCES src/*.cpp include/)
 file(GLOB PROJECT_SHADERS shaders/*.cs
@@ -52,7 +50,7 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS}
                                ${EXTERNAL_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} glfw
-                               ${GLFW_LIBRARIES} glad ${GLAD_LIBRARIES} spdlog::spdlog ${CMAKE_DL_LIBS})
+                               ${GLFW_LIBRARIES} glad ${GLAD_LIBRARIES} ${CMAKE_DL_LIBS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
              RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})

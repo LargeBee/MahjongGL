@@ -40,7 +40,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
     }
     catch (std::ifstream::failure e)
     {
-        //spdlog::error("SHADER::FILE_NOT_SUCCESFULLY_READ");
+        spdlog::error("SHADER::FILE_NOT_SUCCESFULLY_READ");
     }
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
@@ -112,13 +112,13 @@ void Shader::compilationCheck(unsigned int shader, std::string type)
 {
     int success;
     char infoLog[1024];
-    if (type != "PRROGRAM")
+    if (type != "PROGRAM")
     {
         glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
         if (!success)
         {
             glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-            //spdlog::error("Shader Compilation Error {}\n{}", type, infoLog);
+            spdlog::error("Shader Compilation Error {}\n{}", type, infoLog);
         }
     }
     else
@@ -127,7 +127,7 @@ void Shader::compilationCheck(unsigned int shader, std::string type)
         if (!success)
         {
             glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-            //spdlog::error("Program Linking Error {}\n{}", type, infoLog);
+            spdlog::error("Program Linking Error {}\n{}", type, infoLog);
         }
     }
 }

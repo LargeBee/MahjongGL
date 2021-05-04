@@ -15,6 +15,12 @@ else()
     endif()
 endif()
 
+add_subdirectory(external/spdlog)
+
+if(NOT TARGET spdlog)
+    find_package(spdlog REQUIRED)
+endif()
+
 add_subdirectory(external/glad)
 add_subdirectory(external/glm)
 
@@ -23,7 +29,8 @@ include_directories(include/
                     external/glad/include/
                     external/glfw/include/
                     external/glm/
-                    external/stb/)
+                    external/stb/
+                    external/spdlog/include/)
 
 file(GLOB EXTERNAL_SOURCES external/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS include/*.hpp)
@@ -50,7 +57,7 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS}
                                ${EXTERNAL_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} glfw
-                               ${GLFW_LIBRARIES} glad ${GLAD_LIBRARIES} ${CMAKE_DL_LIBS})
+                               ${GLFW_LIBRARIES} glad ${GLAD_LIBRARIES} ${CMAKE_DL_LIBS} spdlog::spdlog)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
              RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})

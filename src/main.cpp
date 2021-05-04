@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include <spdlog/spdlog.h>
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
@@ -14,31 +16,36 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 int main(int, char**) {
+    spdlog::set_level(spdlog::level::debug); // Set global log level to debug
+
     //glfw init
+    spdlog::debug("Initialising GLFW");
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     //glfw window creation
-    //spdlog::debug("Creating GLFW Window");
+    spdlog::debug("Creating GLFW Window");
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "MahjongGL", NULL, NULL);
     if (window == NULL)
     {
-        //spdlog::error("Failed to create GLFW Window");
+        spdlog::error("Failed to create GLFW Window");
         glfwTerminate();
         return -1;
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);  
+    spdlog::debug("Initialised GLFW");
 
     //glad load opengl function pointers
-    //spdlog::debug("Initialising GLAD");
+    spdlog::debug("Initialising GLAD");
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        //spdlog::error("Failed to initialise GLAD");
+        spdlog::error("Failed to initialise GLAD");
         return -1;
     }
+    spdlog::debug("Intialised GLAD");
 
     //build and compile shaders
     Shader basicShaders("shader.vs", "shader.fs");
